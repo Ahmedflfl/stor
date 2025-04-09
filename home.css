@@ -1,0 +1,419 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ /* تنسيق عام */
+ body {
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+      135deg,
+      rgba(230, 244, 241, 0.5) 0%, /* أزرق فاتح شفاف */
+      rgba(255, 223, 186, 0.5) 50%, /* برتقالي خفيف شفاف */
+      rgba(255, 255, 255, 1) 100% /* أبيض */
+    );
+  }
+  
+  
+/* تنسيق الهيدر */
+header {
+  background-color: #000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+}
+
+/* القسم الأيسر */
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 50px; /* تقليل المسافة بين العناصر */
+}
+
+.left-section img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* شريط البحث */
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.search-bar input {
+  width: 250px;
+  padding: 8px;
+  border: none;
+  border-radius: 20px;
+  max-width: 100%;
+}
+
+.search-bar input:focus {
+  outline: none;
+}
+
+/* تنسيق أيقونة المستخدم */
+.user-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-menu img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* القائمة المنسدلة */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  min-width: 150px;
+  text-align: center;
+  display: none;
+  z-index: 5000;
+}
+
+.dropdown-menu p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.dropdown-menu button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background: darkred;
+}
+
+/* إظهار القائمة عند النقر */
+.user-menu.active .dropdown-menu {
+  display: block;
+}
+
+/* 🌟 تحسين التنسيق على الشاشات الصغيرة */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .left-section {
+    gap: 30px; /* تقليل المسافة بين العناصر */
+  }
+
+  .search-bar {
+    width: 100%;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .search-bar input {
+    width: 90%;
+  }
+}
+
+/* تحسين التوافق مع الهواتف 480px */
+@media (max-width: 480px) {
+  .left-section {
+    gap: 15px; /* تقليل المسافات أكثر */
+  }
+
+  .left-section img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .user-menu img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .dropdown-menu {
+    top: 35px;
+    min-width: 120px; /* تصغير القائمة المنسدلة */
+  }
+
+  .dropdown-menu button {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+/* تحسين التوافق مع الشاشات 375px */
+@media (max-width: 375px) {
+  .left-section {
+    gap: 10px;
+  }
+
+  .left-section img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .search-bar input {
+    width: 100%;
+    padding: 6px;
+  }
+
+  .user-menu img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .dropdown-menu {
+    top: 30px;
+    min-width: 110px;
+  }
+}
+
+  
+
+    
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 2rem;
+  }
+  
+  .category {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(83, 44, 3, 0.361);
+    text-align: center;
+    padding: 1rem;
+    width: 300px; /* تثبيت العرض لجعل جميع العناصر بنفس الحجم */
+    height: 400px; /* زيادة الارتفاع لاستيعاب الأزرار */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثير السلاسة */
+  }
+  
+  .category:hover {
+    transform: translateY(-10px); /* رفع العنصر لأعلى */
+    box-shadow: 0 8px 15px rgba(238, 183, 4, 0.618); /* تكبير الظل */
+    cursor: pointer; /* تغيير المؤشر */
+  }
+  
+  .category img {
+    width: 100%; /* ملء العنصر بالكامل */
+    height: 200px; /* تثبيت ارتفاع الصور */
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .category h3 {
+    margin-top: 1rem;
+    color: black;
+  }
+  
+  /* تنسيق الأزرار */
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem; /* مسافة بين الأزرار */
+    margin-top: 1rem;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* زر تفاصيل المنتج */
+  .btn.details {
+    background-color: #007bff; /* لون أزرق */
+    color: #fff;
+  }
+  
+  .btn.details:hover {
+    background-color: #007bff; /* أزرق داكن عند التمرير */
+  }
+  
+  /* زر إضافة إلى السلة */
+  .btn.add-to-cart {
+    background-color: #007bff; /* لون أخضر */
+    color: #fff;
+  }
+  
+  .btn.add-to-cart:hover {
+    background-color: #007bff; /* أخضر داكن عند التمرير */
+  }
+    
+/* استعلامات الوسائط للهواتف */
+@media (max-width: 768px) {
+  .categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* محاذاة العناصر في المنتصف */
+      gap: 1.5rem; /* المسافات بين العناصر */
+  }
+
+  .category {
+      width: 45%; /* عرض العنصر ليأخذ 45% من العرض */
+      height: auto; /* السماح بمرونة الارتفاع */
+  }
+
+  .category img {
+      width: 100%; /* اجعل الصور تتوافق مع عرض العنصر */
+      height: auto; /* الحفاظ على نسبة الأبعاد */
+  }
+
+  .buttons {
+      flex-direction: column; /* جعل الأزرار تظهر عموديًا */
+      gap: 0.5rem; /* مسافة بين الأزرار */
+  }
+
+  .btn {
+      width: 100%; /* جعل الأزرار تأخذ العرض الكامل */
+  }
+}
+
+
+
+
+
+/* footer */
+
+/* تنسيق الحاوية */
+.container {
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* تنسيق العنوان */
+header.company-header h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 10px;
+  color:whitesmoke ;
+}
+
+header.company-header p {
+  text-align: center;
+  font-size: 16px;
+  color:whitesmoke;
+}
+
+/* تنسيق قسم معلومات الاتصال */
+.contact-info {
+  margin-top: 20px;
+}
+
+.contact-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.contact-info p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.contact-info a {
+  color: #020202;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* تنسيق قسم من نحن */
+.about-us {
+  margin-top: 20px;
+}
+
+.about-us h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.about-us p {
+  font-size: 16px;
+  color: #666;
+}
+ت */
+.products {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.products h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.products a {
+    display: block; /* جعل الروابط تظهر ككتل */
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(255, 217, 0, 0.415); /* خلفية شبه شفافة */
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.products a:hover {
+    background: gold; /* تغيير الخلفية عند التحويم */
+}
+/* تنسيق الفوتر */
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+  
+  
+  /* .category {
+    max-width: 90%;
+  } */
+  
+  

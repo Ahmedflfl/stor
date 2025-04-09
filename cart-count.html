@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض السلة</title>
+  <link rel="icon" href="./logo. icon.PNG">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="./cart-count.css">
+ 
+    <!-- <style>
+        body {
+          font-family: Arial, sans-serif;
+          direction: rtl;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 10px;
+          border: 1px solid #ddd;
+          text-align: center;
+        }
+        .quantity-btn, .delete-btn {
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+        .order-form {
+          display: none;
+          margin-top: 20px;
+        }
+        .wallet-numbers {
+          display: none;
+        }
+      </style> -->
+    </head>
+    <body>
+      <h1>المنتجات المختارة</h1>
+      <table id="cart-table">
+        <thead>
+          <tr>
+            <th>اسم المنتج</th>
+            <th>السعر</th>
+            <th>الكمية</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- هنا هتظهر المنتجات -->
+        </tbody>
+      </table>
+      <div class="total container">المجموع الكلي: <span id="total-amount">0</span> جنيه</div>
+      <button class="send-order-btn " onclick="showOrderForm()">إرسال الطلب</button>
+    
+      <!-- فورم إرسال الطلب -->
+      <div class="order-form" id="order-form">
+        <h2>تفاصيل الطلب</h2>
+        <form id="order-details-form">
+          <input type="text" id="customer-name" placeholder="اسم العميل" required>
+          <input type="text" id="customer-address" placeholder="العنوان" required>
+          <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required>
+          <select id="payment-method" required onchange="showWalletNumber(this.value)">
+            <option value="">اختر طريقة الدفع</option>
+            <option value="عند الاستلام">عند الاستلام</option>
+            <option value="فودافون كاش">فودافون كاش</option>
+            <option value="أورنج كاش">أورنج كاش</option>
+            <option value="اتصالات كاش">اتصالات كاش</option>
+          </select>
+          <div id="wallet-number-container" style="display: none;">
+            <input type="text" id="wallet-number" placeholder="رقم المحفظة أو التليفون الخاص بك" required>
+          </div>
+          <div id="company-wallet-numbers" class="wallet-numbers" style="display: none;">
+            <p>أرقام محافظ الشركة:</p>
+            <p>1: 01208395908</p>
+            <p>2: 01101381786</p>
+            <p>3: 01026306624</p>
+          </div>
+          <div id="upload-image-container" style="display: none;">
+            <input type="file" id="upload-image" accept="image/*">
+          </div>
+          <button type="submit">إرسال الطلب</button>
+        </form>
+      </div>
+
+
+      
+
+  
+<!-- <footer>  -->
+  <div class="containerss container">
+    <header class="company-header">
+        <h1>Vision Tech</h1>
+        <p>شركة رائدة في مجال التكنولوجيا والابتكار</p>
+    </header>
+    <section class="about-us ">
+        <h2>Vision Tech</h2>
+        <p>أمن والخصوصية وجهان لعملة واحدة. لا يمكنك الحصول على الخصوصية دون الأمن والعكس صحيح.</p>
+    </section>
+    <section class="contact-info">
+        <img src="./logo/phone.png" alt="" width="50px">
+        <h2>معلومات الاتصال</h2>  
+        <p>هاتف: <a href="tel:+2001208395908">(+20) 01208395908</a></p>
+        <img src="./logo/sms.png" alt="" width="50px"> 
+        <p>البريد الإلكتروني: <a href="mailto:contact@visiontech-eg.com">contact@visiontech-eg.com</a></p>
+    </section>
+    <section class="products">
+        <h2>المنتجات</h2>
+        <a href="./Camira.html">الكاميرات</a>
+        <a href="./pasma.html">أجهزة البصمة</a>
+        <a href="./hard.html">الهاردات</a>
+        <a href="support.html">الدعم</a>
+    </section>
+    <footer>
+        <p>© 2025 Vision Tech. جميع الحقوق محفوظة.</p>
+    </footer>
+</div>
+
+
+<script src="./cart-count.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>

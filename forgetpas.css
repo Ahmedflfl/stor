@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* إعدادات الجسم */
+body {
+    font-family: Arial, sans-serif;
+  
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 16%,
+      rgba(252, 176, 69, 1) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+  }
+
+/* تنسيق الحاوية الرئيسية */
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #00000080;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* تنسيق العنوان */
+h2 {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* تنسيق الوصف النصي */
+p {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* تنسيق الحقول والنموذج */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* تنسيق حقول الإدخال */
+input[type="text"],
+input[type="submit"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* تنسيق زر الإرسال */
+input[type="submit"] {
+    background-color: rgba(0, 0, 0, 0.296);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #ffd700;
+}

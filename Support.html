@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الدعم</title>
+    <link rel="icon" href="./WhatsApp-Image-2024-11-08-at-23.43.04_806f7b4f.PNG">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+     <link rel="stylesheet" href="./support.css">
+
+</head>
+<body>
+
+    <header>
+        <div class="left-section">
+          <a href="https://wa.me/message/KKORYQC22BFQA1">
+            <img src=".//logo/WhatsApp Image 2024-12-09 at 9.55.46 PM.jpeg" alt="WhatsApp Logo" />
+          </a>
+          <img src=".//logo/phone.png" alt="Hotline Logo" />
+          <a href="./cart-count.html">
+            <div class="cart-container">
+              <img src=".//logo/basket.png" alt="Cart Logo سلة التسوق" />
+              <span id="cart-count" class="cart-count">0</span>
+            </div>
+          </a>
+          
+          <!-- أيقونة المستخدم -->
+          <div class="user-menu">
+            <img src=".//logo/user.png" alt="User Icon" id="user-icon" />
+            <div class="dropdown-menu" id="dropdown-menu">
+                <p id="user-name">اسم المستخدم</p>
+                <button id="logout-btn">تسجيل الخروج</button>
+            </div>
+        </div>
+        </div>
+      
+        <div class="search-bar">
+          <input type="text" placeholder="Search Vision Tech..." />
+        </div>
+      </header>
+
+
+<br><br><br>
+
+    <!-- الدعم -->
+    <div class="container container">
+        <h2>الدعم الفني</h2>
+        <p>يرجى ملء النموذج أدناه لتقديم شكوى أو مقترح</p>
+        <form id="supportForm">
+            <input type="text" name="name" placeholder="الاسم" required>
+            <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            <textarea name="message" rows="5" placeholder="اكتب شكواك أو مقترحك هنا" required></textarea>
+            <button type="submit">إرسال</button>
+        </form>
+    </div>
+
+   
+ 
+<!-- <footer>  -->
+    <div class="containerss container">
+        <headerss class="company-header">
+            <h1>Vision Tech</h1>
+            <p>شركة رائدة في مجال التكنولوجيا والابتكار</p>
+        </headerss>
+        <section class="about-us">
+            <h2>Vision Tech</h2>
+            <p>أمن والخصوصية وجهان لعملة واحدة. لا يمكنك الحصول على الخصوصية دون الأمن والعكس صحيح.</p>
+        </section>
+        <section class="contact-info">
+            <img src="./logo/phone.png" alt="" width="50px">
+            <h2>معلومات الاتصال</h2>  
+            <p>هاتف: <a href="tel:+2001208395908">(+20) 01208395908</a></p>
+            <img src="./logo/sms.png" alt="" width="50px"> 
+            <p>البريد الإلكتروني: <a href="mailto:contact@visiontech-eg.com">contact@visiontech-eg.com</a></p>
+        </section>
+        <section class="products">
+            <h2>المنتجات</h2>
+            <a href="./Camira.html">الكاميرات</a>
+            <a href="./pasma.html">أجهزة البصمة</a>
+            <a href="./hard.html">الهاردات</a>
+            <a href="support.html">الدعم</a>
+        </section>
+        <footer>
+            <p>© 2025 Vision Tech. جميع الحقوق محفوظة.</p>
+        </footer>
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+        // دالة لحفظ البيانات في LocalStorage
+        function saveComplaintToLocalStorage(name, email, message) {
+            const complaint = {
+                name: name,
+                email: email,
+                message: message,
+                timestamp: new Date().toLocaleString()
+            };
+
+            let complaints = JSON.parse(localStorage.getItem('complaints')) || [];
+            complaints.push(complaint);
+            localStorage.setItem('complaints', JSON.stringify(complaints));
+        }
+
+        // دالة لإرسال النموذج
+        document.getElementById('supportForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const message = document.querySelector('textarea[name="message"]').value;
+
+            saveComplaintToLocalStorage(name, email, message);
+
+            // عرض Toast Notification
+            Swal.fire({
+                position: 'top-end', // مكان ظهور الرسالة
+                icon: 'success', // أيقونة نجاح
+                title: 'تم الإرسال بنجاح!',
+                showConfirmButton: false, // إخفاء زر التأكيد
+                timer: 2000 // إخفاء الرسالة بعد 3 ثواني
+            });
+
+            // إعادة تعيين النموذج
+            document.getElementById('supportForm').reset();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
+</body>
+</html>

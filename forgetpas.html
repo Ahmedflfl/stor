@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نسيت كلمة المرور</title>
+    <link rel="icon" href="./logo. icon.PNG">
+    <link rel="stylesheet" href="./forgetpas.css">
+</head>
+<body>
+    <img src=".//logo/WhatsApp-Image-2024-11-08-at-23.43.04_806f7b4f.PNG" width="250" alt="">
+    <div class="container">
+        <h2>استرداد كلمه المرور</h2>
+        <p>أدخل بريدك الإلكتروني أو اسم المستخدم لاسترجاع كلمة المرور.</p>
+        <form action="reset_password.php" method="POST">
+            <label for="email" style="color: white;">البريد الإلكتروني أو اسم المستخدم</label>
+            <input type="text" id="email" name="email" required placeholder="أدخل بريدك الإلكتروني أو اسم المستخدم">
+            <input type="submit" value="إرسال رابط استرجاع كلمة المرور">
+        </form>
+    </div>
+ <script src="./forgetpas.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+135deg,
+rgba(230, 244, 241, 0.5) 0%, /* أزرق فاتح شفاف */
+rgba(255, 223, 186, 0.5) 50%, /* برتقالي خفيف شفاف */
+rgba(255, 255, 255, 1) 100% /* أبيض */
+);
+    text-align: center;
+ 
+}
+
+
+
+
+  
+/* تنسيق الهيدر */
+header {
+    background-color: #000;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 3000;
+  }
+  
+  .dropdown-menu {
+    display: none; /* القائمة مخفية بشكل افتراضي */
+  }
+  
+  .dropdown-menu.active {
+    display: block; /* إظهار القائمة عند إضافة class "active" */
+  }
+  
+  /* القسم الأيسر */
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* تقليل المسافة بين العناصر */
+  }
+  
+  .left-section img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  
+  /* شريط البحث */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .search-bar input {
+    width: 250px;
+    padding: 8px;
+    border: none;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+  
+  .search-bar input:focus {
+    outline: none;
+  }
+  
+  /* تنسيق أيقونة المستخدم */
+  .user-menu {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .user-menu img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  
+  /* القائمة المنسدلة */
+  .dropdown-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    min-width: 150px;
+    text-align: center;
+    display: none;
+    z-index: 5000;
+  }
+  
+  .dropdown-menu p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .dropdown-menu button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu button:hover {
+    background: darkred;
+  }
+  
+  /* إظهار القائمة عند النقر */
+  .user-menu.active .dropdown-menu {
+    display: block;
+  }
+  
+  /* 🌟 تحسين التنسيق على الشاشات الصغيرة */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+  
+    .left-section {
+      gap: 30px; /* تقليل المسافة بين العناصر */
+    }
+  
+    .search-bar {
+      width: 100%;
+      justify-content: center;
+      margin-top: 5px;
+    }
+  
+    .search-bar input {
+      width: 90%;
+    }
+  }
+  
+  /* تحسين التوافق مع الهواتف 480px */
+  @media (max-width: 480px) {
+    .left-section {
+      gap: 15px; /* تقليل المسافات أكثر */
+    }
+  
+    .left-section img {
+      width: 25px;
+      height: 25px;
+    }
+  
+    .search-bar input {
+      width: 100%;
+    }
+  
+    .user-menu img {
+      width: 25px;
+      height: 25px;
+    }
+  
+    .dropdown-menu {
+      top: 35px;
+      min-width: 120px; /* تصغير القائمة المنسدلة */
+    }
+  
+    .dropdown-menu button {
+      font-size: 12px;
+      padding: 6px;
+    }
+  }
+  
+  /* تحسين التوافق مع الشاشات 375px */
+  @media (max-width: 375px) {
+    .left-section {
+      gap: 10px;
+    }
+  
+    .left-section img {
+      width: 22px;
+      height: 22px;
+    }
+  
+    .search-bar input {
+      width: 100%;
+      padding: 6px;
+    }
+  
+    .user-menu img {
+      width: 22px;
+      height: 22px;
+    }
+  
+    .dropdown-menu {
+      top: 30px;
+      min-width: 110px;
+    }
+  }
+
+.container {
+    max-width: 100%;
+    width:50%;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+input, textarea {
+    width: calc(100% - 22px); /* تأخذ العرض الكامل مع مراعاة الـ padding */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px; /* تصغير حجم الخط */
+}
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #218838;
+}
+@media (max-width: 425px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+    input, textarea {
+        font-size: 12px;
+        padding: 8px;
+    }
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+
+
+/* footer */
+/* تنسيق الحاوية */
+.containerss {
+max-width: 90%; /* عرض أقل لتناسب الشاشات الصغيرة */
+width: 100%;
+background: rgba(255, 255, 255, 0.1); /* خلفية شبه شفافة */
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+backdrop-filter: blur(10px); /* تأثير ضبابي */
+
+}
+
+/* تنسيق العنوان */
+header.company-header h1 {
+font-size: 24px;
+text-align: center;
+margin-bottom: 10px;
+color: rgb(6, 6, 6);
+}
+
+header.company-header p {
+text-align: center;
+font-size: 16px;
+color: rgb(0, 0, 0);
+opacity: 0.8; /* شفافية للنص */
+}
+
+/* تنسيق قسم من نحن */
+.about-us {
+margin-top: 20px;
+}
+
+.about-us h2 {
+font-size: 20px;
+margin-bottom: 10px;
+color: rgb(19, 19, 19);
+}
+
+.about-us p {
+font-size: 16px;
+color: rgb(5, 5, 5);
+opacity: 0.8;
+}
+
+/* تنسيق قسم معلومات الاتصال */
+.contact-info {
+margin-top: 20px;
+text-align: center;
+}
+
+.contact-info h2 {
+font-size: 20px;
+margin-bottom: 10px;
+color: black;
+}
+
+.contact-info p {
+font-size: 16px;
+margin-bottom: 8px;
+color: black;
+opacity: 0.8;
+}
+
+.contact-info a {
+color: black;
+text-decoration: none;
+font-weight: bold;
+}
+
+.contact-info a:hover {
+text-decoration: underline;
+}
+
+.contact-info img {
+margin: 10px 0; /* مسافة حول الأيقونات */
+}
+
+/* تنسيق قسم المنتجات */
+.products {
+margin-top: 20px;
+text-align: center;
+}
+
+.products h2 {
+font-size: 20px;
+margin-bottom: 10px;
+color: black;
+}
+
+.products a {
+display: block; /* جعل الروابط تظهر ككتل */
+color: black;
+text-decoration: none;
+font-size: 16px;
+margin: 10px 0;
+padding: 10px;
+background: rgba(255, 217, 0, 0.415); /* خلفية شبه شفافة */
+border-radius: 5px;
+transition: background 0.3s ease;
+}
+
+.products a:hover {
+background: gold; /* تغيير الخلفية عند التحويم */
+}
+
+/* تنسيق الفوتر */
+footer {
+margin-top: 20px;
+text-align: center;
+font-size: 14px;
+color: black;
+opacity: 0.8;
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 425px) {
+.container {
+padding: 15px; /* تقليل الـ padding */
+}
+
+header.company-header h1 {
+font-size: 20px; /* تصغير حجم العنوان */
+}
+
+header.company-header p {
+font-size: 14px; /* تصغير حجم النص */
+}
+
+.about-us h2, .contact-info h2, .products h2 {
+font-size: 18px; /* تصغير حجم العناوين */
+}
+
+.about-us p, .contact-info p, .products a {
+font-size: 14px; /* تصغير حجم النص */
+}
+
+.contact-info img {
+width: 40px; /* تصغير حجم الأيقونات */
+}
+}

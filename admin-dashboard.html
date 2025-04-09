@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الأدمن</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            width: 30%;
+            min-width: 200px;
+            padding: 20px;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .stat-box span {
+            display: block;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .actions-container {
+            margin-top: 20px;
+        }
+
+        .admin-btn {
+            display: block;
+            width: 250px;
+            margin: 10px auto;
+            padding: 15px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .admin-btn:hover {
+            background: #218838;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>🔹 لوحة تحكم الأدمن 🔹</h1>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                👥 عدد العملاء
+                <span id="userCount">0</span>
+            </div>
+            <div class="stat-box">
+                📦 عدد الطلبات
+                <span id="orderCount">0</span>
+            </div>
+            <div class="stat-box">
+                🔥 المنتج الأكثر طلبًا
+                <span id="topProduct">-</span>
+                <small id="topProductCount">0 طلب</small>
+            </div>
+        </div>
+
+        <div class="actions-container">
+            <a href="./view orders.html" class="admin-btn">📦 عرض الطلبات</a>
+            <a href="./Show Data Admen.html" class="admin-btn">📋 عرض بيانات العملاء</a>
+            <a href="./Most requested requests.html" class="admin-btn">🔥 تفاصيل المنتجات الأكثر طلبًا</a>
+            <a href="index.html" class="admin-btn logout-btn">🚪 تسجيل الخروج</a>
+        </div>
+    </div>
+
+    <script>
+        // تحديث الإحصائيات تلقائيًا بدون ريفريش
+        function updateStats() {
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+            const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            document.getElementById('userCount').innerText = storedUsers.length;
+            document.getElementById('orderCount').innerText = storedOrders.length;
+
+            updateMostRequestedProduct();
+        }
+
+        // حساب المنتج الأكثر طلبًا
+        function updateMostRequestedProduct() {
+            const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+            const productCount = {};
+
+            // التأكد من أن الطلبات موجودة في localStorage
+            if (!Array.isArray(storedOrders) || storedOrders.length === 0) {
+                document.getElementById('topProduct').innerText = "لا يوجد";
+                document.getElementById('topProductCount').innerText = "0 طلب";
+                return;
+            }
+
+            // حساب عدد الطلبات لكل منتج
+            storedOrders.forEach(order => {
+                if (order.products && Array.isArray(order.products)) {
+                    order.products.forEach(product => {
+                        if (product.name && product.quantity) {
+                            productCount[product.name] = (productCount[product.name] || 0) + product.quantity;
+                        }
+                    });
+                }
+            });
+
+            // العثور على المنتج الأكثر طلبًا
+            const sortedProducts = Object.entries(productCount).sort((a, b) => b[1] - a[1]);
+            const topProduct = sortedProducts.length > 0 ? sortedProducts[0] : null;
+
+            const topProductElement = document.getElementById('topProduct');
+            const topProductCountElement = document.getElementById('topProductCount');
+
+            if (topProduct) {
+                topProductElement.innerText = topProduct[0];
+                topProductCountElement.innerText = `${topProduct[1]} طلب`;
+            } else {
+                topProductElement.innerText = "لا يوجد";
+                topProductCountElement.innerText = "0 طلب";
+            }
+        }
+
+        // تحديث البيانات تلقائيًا عند تغيير `localStorage`
+        window.addEventListener('storage', updateStats);
+
+        // تحديث البيانات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', updateStats);
+
+        // محاكاة إدخال بيانات (يمكنك إزالتها بعد الاختبار)
+        function simulateOrders() {
+            const testOrders = [
+                { id: 1, products: [{ name: "آيفون 14", quantity: 10 }, { name: "لابتوب Dell", quantity: 5 }] },
+                { id: 2, products: [{ name: "آيفون 14", quantity: 7 }, { name: "سماعات AirPods", quantity: 4 }] }
+            ];
+
+            localStorage.setItem('orders', JSON.stringify(testOrders));
+            window.dispatchEvent(new Event('storage')); // تحديث البيانات تلقائيًا
+        }
+
+        // simulateOrders(); // قم بتشغيل هذه الدالة لإضافة طلبات تجريبية
+    </script>
+
+</body>
+</html>

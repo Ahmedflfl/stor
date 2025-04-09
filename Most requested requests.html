@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنتجات الأكثر طلبًا</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>المنتجات الأكثر طلبًا</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>اسم المنتج</th>
+                <th>عدد الطلبات</th>
+                <th>السعر</th>
+            </tr>
+        </thead>
+        <tbody id="most-ordered-products-body">
+            <!-- المنتجات الأكثر طلبًا ستُعرض هنا -->
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const mostOrderedProductsBody = document.getElementById("most-ordered-products-body");
+
+            // جلب بيانات الطلبات من localStorage
+            let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+            // حساب عدد الطلبات لكل منتج
+            const productCounts = {};
+            orders.forEach(order => {
+                if (order.cart && Array.isArray(order.cart)) {
+                    order.cart.forEach(item => {
+                        if (productCounts[item.name]) {
+                            productCounts[item.name].count += item.quantity;
+                        } else {
+                            productCounts[item.name] = {
+                                count: item.quantity,
+                                price: item.price
+                            };
+                        }
+                    });
+                }
+            });
+
+            // تحويل البيانات إلى مصفوفة + تصفية اللي عدد الطلبات أكبر من 3 + ترتيبها
+            const sortedProducts = Object.entries(productCounts)
+                .map(([name, data]) => ({
+                    name,
+                    count: data.count,
+                    price: data.price
+                }))
+                .filter(product => product.count > 3) // 👈 فقط المنتجات اللي اتطلبت أكثر من 3 مرات
+                .sort((a, b) => b.count - a.count); // ترتيب تنازلي حسب عدد الطلبات
+
+            // عرض المنتجات
+            function displayMostOrderedProducts() {
+                mostOrderedProductsBody.innerHTML = "";
+
+                if (sortedProducts.length === 0) {
+                    mostOrderedProductsBody.innerHTML = `
+                        <tr><td colspan="3">لا توجد منتجات مطلوبة أكثر من 3 مرات</td></tr>
+                    `;
+                    return;
+                }
+
+                sortedProducts.forEach(product => {
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${product.name}</td>
+                        <td>${product.count}</td>
+                        <td>${product.price} ج.م</td>
+                    `;
+
+                    mostOrderedProductsBody.appendChild(row);
+                });
+            }
+
+            displayMostOrderedProducts();
+        });
+    </script>
+</body>
+</html>

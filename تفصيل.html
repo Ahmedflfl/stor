@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض المنتجات حسب الفئة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .filter {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .products-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .product {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product h3 {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .product p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .product .price {
+            font-size: 20px;
+            color: #4CAF50;
+            margin-top: 10px;
+        }
+
+        .product .add-to-cart {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .product .add-to-cart:hover {
+            background-color: #45a049;
+        }
+
+        /* Style for toast notification */
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+        .toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>قائمة المنتجات حسب الفئة</h1>
+        
+        <!-- فلتر الفئات -->
+        <div class="filter">
+            <label for="category">اختر الفئة:</label>
+            <select id="category" onchange="filterProducts()">
+                <option value="all">الكل</option>
+                <option value="electronics">إلكترونيات</option>
+                <option value="jewelery">مجوهرات</option>
+                <option value="men's clothing">ملابس رجالية</option>
+                <option value="women's clothing">ملابس نسائية</option>
+            </select>
+        </div>
+
+        <!-- قائمة المنتجات -->
+        <div id="products" class="products-list">
+            <!-- سيتم ملء هذه المنطقة بالمنتجات عبر JavaScript -->
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">تم إضافة المنتج إلى السلة!</div>
+
+    <script>
+        let productsData = [];
+
+        // جلب المنتجات من API
+        fetch('https://fakestoreapi.com/products')
+          .then(response => response.json())
+          .then(data => {
+              productsData = data;  // حفظ البيانات في متغير
+              displayProducts(productsData); // عرض جميع المنتجات عند تحميل الصفحة
+          })
+          .catch(error => {
+              console.error('Error fetching products:', error);
+          });
+
+        // عرض المنتجات بناءً على الفئة المحددة
+        function filterProducts() {
+            const category = document.getElementById('category').value;
+            const filteredProducts = category === 'all' 
+                ? productsData
+                : productsData.filter(product => product.category === category);
+            displayProducts(filteredProducts);
+        }
+
+        // عرض المنتجات في الصفحة
+        function displayProducts(products) {
+            const productsContainer = document.getElementById('products');
+            productsContainer.innerHTML = ''; // مسح المحتوى القديم
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}">
+                    <h3>${product.title}</h3>
+                    <p>${product.description}</p>
+                    <div class="price">$${product.price}</div>
+                    <button class="add-to-cart" onclick="addToCart('${product.title}')">إضافة إلى السلة</button>
+                `;
+                
+                productsContainer.appendChild(productDiv);
+            });
+        }
+
+        // إضافة المنتج إلى السلة وعرض التوست
+        function addToCart(productTitle) {
+            // إظهار التوست
+            const toast = document.getElementById('toast');
+            toast.textContent = `${productTitle} تم إضافته إلى السلة!`;
+            toast.className = "toast show";
+            
+            // إخفاء التوست بعد 3 ثواني
+            setTimeout(() => {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 16%,
+      rgba(252, 176, 69, 1) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+  }
+  
+  /* صندوق تسجيل الدخول */
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #00000080;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-container h2 {
+    margin-bottom: 20px;
+    /* color:rgba(50, 0, 250, 0.845); */
+    color: white;
+  }
+  
+  /* الحقول */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  /* تنسيق الحقول (Input, Select) */
+  label {
+  font-size: 14px;
+  color: white;
+  margin-top: 10px;
+  display: block;
+  text-align: right;
+  }
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    direction: ltr; /* لضبط اتجاه الكتابة داخل الحقول من اليسار لليمين */
+  }
+  
+  /* زر الدخول */
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.296);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .login-btn:hover {
+    background-color: #ffd700;
+  }
+  
+  /* روابط */
+  .links {
+    margin-top: 15px;
+    /* color: rgba(50, 0, 250, 0.845); */
+    color: white;
+  }
+  
+  .links a {
+    text-decoration: none;
+    /* color: rgba(50, 0, 250, 0.845); */
+    color: white;
+    font-size: 14px;
+  }
+  
+  .links a:hover {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 375px) {
+    .login-container {
+      display: block;
+    }
+  }
+  
+  
+  /* #sent{
+      width:25%;
+      height: 100vh;
+      background-color:black;
+  }
+  #evens{
+      width: 75%;
+      height: 100vh;
+      background-color: #ffd700;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-around;
+      justify-content: space-around;
+  }
+  
+  #evens #log{
+      width: 40%;
+      height: 30vh;
+      background-color: red;
+  } */
+  

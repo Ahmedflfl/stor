@@ -1,0 +1,300 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+body{
+  background: linear-gradient(
+    135deg,
+    rgba(230, 244, 241, 0.5) 0%, /* أزرق فاتح شفاف */
+    rgba(255, 223, 186, 0.5) 50%, /* برتقالي خفيف شفاف */
+    rgba(255, 255, 255, 1) 100% /* أبيض */
+  );
+}
+  /* تنسيق الجدول */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .delete-btn:hover {
+    background-color: #cc0000;
+  }
+  .quantity-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  .quantity-btn:hover {
+    background-color: #45a049;
+  }
+  .send-order-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .send-order-btn:hover {
+    background-color: #45a049;
+  }
+  .total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  .order-form {
+    display: none; /* الفورم بتكون مخفية في الأول */
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+  }
+  .order-form input, .order-form select, .order-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .order-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .order-form button:hover {
+    background-color: #45a049;
+  }
+
+  /* Scroll لقائمة طرق الدفع */
+  #payment-method {
+    max-height: 150px; /* ارتفاع أقصى للقائمة */
+    overflow-y: auto; /* إضافة Scroll */
+  }
+
+  /* تنسيقات الـ Responsive Design */
+@media (max-width: 768px) {
+    /* تنسيق الجدول لشاشات الموبايل */
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+    th {
+      display: none;
+    }
+    tr {
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+    }
+    td {
+      border: none;
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+    }
+    td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      width: 50%;
+      padding-right: 10px;
+      text-align: left;
+      font-weight: bold;
+    }
+  
+    /* تنسيق الفورم لشاشات الموبايل */
+    .order-form {
+      padding: 10px;
+    }
+    .order-form input, .order-form select, .order-form textarea {
+      font-size: 14px;
+    }
+    .order-form button {
+      width: 100%;
+    }
+  
+    /* تنسيق زر إرسال الطلب والمجموع الكلي */
+    .cart-summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* توسيط العناصر أفقيًا */
+      justify-content: center; /* توسيط العناصر عموديًا */
+      gap: 10px; /* المسافة بين العناصر */
+      margin-top: 20px;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .send-order-btn {
+      width: 80%; /* جعل الزر يأخذ 80% من عرض الشاشة */
+      max-width: 300px; /* أقصى عرض للزر */
+    }
+  }
+
+
+
+ 
+/* footer */ /* تنسيق الفوتر */
+/* تنسيق الحاوية */
+.containerss {
+  max-width: 90%; /* عرض أقل لتناسب الشاشات الصغيرة */
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1); /* خلفية شبه شفافة */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* تأثير ضبابي */
+  
+  }
+  
+  /* تنسيق العنوان */
+  header.company-header h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: rgb(6, 6, 6);
+  }
+  
+  header.company-header p {
+  text-align: center;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  opacity: 0.8; /* شفافية للنص */
+  }
+  
+  /* تنسيق قسم من نحن */
+  .about-us {
+  margin-top: 20px;
+  }
+  
+  .about-us h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: rgb(19, 19, 19);
+  }
+  
+  .about-us p {
+  font-size: 16px;
+  color: rgb(5, 5, 5);
+  opacity: 0.8;
+  }
+  
+  /* تنسيق قسم معلومات الاتصال */
+  .contact-info {
+  margin-top: 20px;
+  text-align: center;
+  }
+  
+  .contact-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: black;
+  }
+  
+  .contact-info p {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: black;
+  opacity: 0.8;
+  }
+  
+  .contact-info a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  }
+  
+  .contact-info a:hover {
+  text-decoration: underline;
+  }
+  
+  .contact-info img {
+  margin: 10px 0; /* مسافة حول الأيقونات */
+  }
+  
+  /* تنسيق قسم المنتجات */
+  .products {
+  margin-top: 20px;
+  text-align: center;
+  }
+  
+  .products h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: black;
+  }
+  
+  .products a {
+  display: block; /* جعل الروابط تظهر ككتل */
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10px 0;
+  padding: 10px;
+  background: rgba(255, 217, 0, 0.415); /* خلفية شبه شفافة */
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  }
+  
+  .products a:hover {
+  background: gold; /* تغيير الخلفية عند التحويم */
+  }
+  
+  /* تنسيق الفوتر */
+  footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: black;
+  opacity: 0.8;
+  }
+  
+  /* تحسينات للشاشات الصغيرة */
+  @media (max-width: 425px) {
+  .container {
+  padding: 15px; /* تقليل الـ padding */
+  }
+  
+  header.company-header h1 {
+  font-size: 20px; /* تصغير حجم العنوان */
+  }
+  
+  header.company-header p {
+  font-size: 14px; /* تصغير حجم النص */
+  }
+  
+  .about-us h2, .contact-info h2, .products h2 {
+  font-size: 18px; /* تصغير حجم العناوين */
+  }
+  
+  .about-us p, .contact-info p, .products a {
+  font-size: 14px; /* تصغير حجم النص */
+  }
+  
+  .contact-info img {
+  width: 40px; /* تصغير حجم الأيقونات */
+  }
+  }
+  
