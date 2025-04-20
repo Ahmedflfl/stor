@@ -29,26 +29,19 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 30px;
   flex-wrap: wrap;
   position: sticky;
   top: 0;
   z-index: 3000;
 }
 
-.dropdown-menu {
-  display: none; /* القائمة مخفية بشكل افتراضي */
-}
-
-.dropdown-menu.active {
-  display: block; /* إظهار القائمة عند إضافة class "active" */
-}
-
-/* القسم الأيسر */
+/* Left section */
 .left-section {
   display: flex;
   align-items: center;
-  gap: 50px; /* تقليل المسافة بين العناصر */
+  gap: 40px;
+  flex-wrap: nowrap;
 }
 
 .left-section img {
@@ -57,28 +50,7 @@ header {
   cursor: pointer;
 }
 
-/* شريط البحث */
-.search-bar {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.search-bar input {
-  width: 250px;
-  padding: 8px;
-  border: none;
-  border-radius: 20px;
-  max-width: 100%;
-}
-
-.search-bar input:focus {
-  outline: none;
-}
-
-/* تنسيق أيقونة المستخدم */
+/* User menu */
 .user-menu {
   position: relative;
   cursor: pointer;
@@ -90,7 +62,6 @@ header {
   border-radius: 50%;
 }
 
-/* القائمة المنسدلة */
 .dropdown-menu {
   position: absolute;
   top: 40px;
@@ -104,6 +75,10 @@ header {
   text-align: center;
   display: none;
   z-index: 5000;
+}
+
+.user-menu.active .dropdown-menu {
+  display: block;
 }
 
 .dropdown-menu p {
@@ -126,12 +101,92 @@ header {
   background: darkred;
 }
 
-/* إظهار القائمة عند النقر */
-.user-menu.active .dropdown-menu {
+/* ====== Product Menu ====== */
+.product-menu {
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.dropbtn {
+  background-color: #222;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 2000;
+  border-radius: 6px;
+  overflow: hidden;
+  right: 0;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* 🌟 تحسين التنسيق على الشاشات الصغيرة */
+/* ====== Search bar with icon ====== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.search-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.search-icon:hover {
+  transform: scale(1.1);
+}
+
+#search-input {
+  width: 250px;
+  padding: 8px;
+  border: none;
+  border-radius: 20px;
+  margin-left: 10px;
+  display: none;
+  max-width: 100%;
+}
+
+#search-input:focus {
+  outline: none;
+}
+
+/* ====== Responsive ====== */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -140,75 +195,60 @@ header {
   }
 
   .left-section {
-    gap: 30px; /* تقليل المسافة بين العناصر */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .product-menu {
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+    background: none;
+  }
+
+  .dropdown-content a {
+    background-color: #fff;
+    margin: 2px 0;
+    border-radius: 5px;
   }
 
   .search-bar {
+    flex-direction: column;
     width: 100%;
-    justify-content: center;
-    margin-top: 5px;
   }
 
-  .search-bar input {
+  #search-input {
+    margin: 10px 0 0 0;
     width: 90%;
   }
 }
 
-/* تحسين التوافق مع الهواتف 480px */
 @media (max-width: 480px) {
-  .left-section {
-    gap: 15px; /* تقليل المسافات أكثر */
-  }
-
-  .left-section img {
-    width: 25px;
-    height: 25px;
-  }
-
-  .search-bar input {
-    width: 100%;
-  }
-
+  .left-section img,
+  .search-icon,
   .user-menu img {
     width: 25px;
     height: 25px;
   }
 
-  .dropdown-menu {
-    top: 35px;
-    min-width: 120px; /* تصغير القائمة المنسدلة */
+  .dropbtn {
+    font-size: 14px;
+    padding: 8px 12px;
   }
 
-  .dropdown-menu button {
-    font-size: 12px;
+  .dropdown-content a {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #search-input {
     padding: 6px;
-  }
-}
-
-/* تحسين التوافق مع الشاشات 375px */
-@media (max-width: 375px) {
-  .left-section {
-    gap: 10px;
-  }
-
-  .left-section img {
-    width: 22px;
-    height: 22px;
-  }
-
-  .search-bar input {
-    width: 100%;
-    padding: 6px;
-  }
-
-  .user-menu img {
-    width: 22px;
-    height: 22px;
-  }
-
-  .dropdown-menu {
-    top: 30px;
-    min-width: 110px;
   }
 }
 

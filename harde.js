@@ -59,6 +59,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // زر التفصيل
 document.addEventListener("DOMContentLoaded", function () {
   let detailButtons = document.querySelectorAll(".btn.details");
@@ -119,6 +132,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
+
+
+
 // ايكون المستخدم
 document.addEventListener("DOMContentLoaded", () => {
   const userIcon = document.getElementById("user-icon");
@@ -163,6 +180,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+//  الهدار السيرش 
+const products = [
+  { name: 'كاميرا مراقبة', keywords: ['كاميرا', 'camera'], url: './Camira.html' },
+  { name: 'بصمة حضور وانصراف', keywords: ['بصمة', 'fingerprint'], url: './pasma.html' },
+  { name: 'هارد تسجيل', keywords: ['هارد', 'تسجيل', 'hard'], url: './hard.html' },
+  { name: 'اكسسوارات', keywords: ['اكسسوار', 'accessory'], url: './Axss.html' },
+  { name: 'عروض خاصة', keywords: ['عرض', 'عروض', 'offers'], url: './ofars.html' },
+  { name: 'كاميرا IP موديل HIKVISION DS-2CD1023G0-I', keywords: ['hikvision', 'ds-2cd1023g0-i', 'كاميرا ip'], url: './product1.html' },
+  { name: 'Fingerprint ZKTeco MB160', keywords: ['zkteco', 'mb160', 'fingerprint'], url: './product2.html' },
+  // أضف منتجات تانية هنا
+];
+
+const searchIcon = document.getElementById('search-icon');
+const searchInput = document.getElementById('search-input');
+
+// إظهار وإخفاء خانة البحث
+searchIcon.addEventListener('click', () => {
+  const isVisible = searchInput.style.display === 'block';
+  searchInput.style.display = isVisible ? 'none' : 'block';
+  if (!isVisible) searchInput.focus();
+});
+
+// تنفيذ البحث عند الضغط على Enter
+searchInput.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    const query = searchInput.value.trim().toLowerCase();
+
+    const result = products.find(product =>
+      product.keywords.some(keyword => query.includes(keyword.toLowerCase()))
+    );
+
+    if (result) {
+      window.location.href = result.url;
+    } else {
+      alert('لم يتم العثور على نتائج مطابقة!');
+    }
+  }
+});
 
 
  
