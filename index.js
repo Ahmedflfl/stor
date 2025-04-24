@@ -3,22 +3,23 @@ const loginForm = document.querySelector('form');
 const usernameInput = document.querySelector('input[name="username"]');
 const passwordInput = document.querySelector('input[name="password"]');
 
+// زر الدخول كزائر
+const guestLink = document.querySelector('a[href="./home.html"]:not([rel])'); // تحديد رابط الزائر تحديدًا
+
 // التعامل مع الحدث عند محاولة تسجيل الدخول
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault(); // منع السلوك الافتراضي للنموذج
 
     // جلب القيم المدخلة
-    const enteredUsername = usernameInput.value.trim(); // إزالة المسافات الزائدة
+    const enteredUsername = usernameInput.value.trim();
     const enteredPassword = passwordInput.value.trim();
 
     // بيانات الأدمن الثابتة
     const adminUsername = "صابر محمد فلفل";
     const adminPassword = "123456";
 
-    // استرجاع البيانات المخزنة في localStorage
     const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-    // التحقق إذا كان المستخدم هو الأدمن
     if (enteredUsername === adminUsername && enteredPassword === adminPassword) {
         Swal.fire({
             icon: 'success',
@@ -27,19 +28,16 @@ loginForm.addEventListener('submit', (e) => {
             timer: 1500
         });
 
-        // تخزين بيانات الأدمن في الجلسة
-        sessionStorage.setItem('loggedInUser', adminUsername);
-        sessionStorage.setItem('userRole', 'admin');
+        // تخزين بيانات الأدمن كمستخدم حالي
+        localStorage.setItem('currentUser', JSON.stringify({ name: adminUsername, role: 'admin' }));
 
-        // توجيه الأدمن إلى لوحة التحكم
         setTimeout(() => {
             window.location.href = './admin-dashboard.html';
         }, 1500);
 
-        return; // الخروج من الدالة
+        return;
     }
 
-    // التحقق من وجود مستخدم بنفس البيانات
     const userFound = storedUsers.find(user => 
         user.name === enteredUsername && user.password === enteredPassword
     );
@@ -52,16 +50,12 @@ loginForm.addEventListener('submit', (e) => {
             timer: 1500
         });
 
-        // تخزين بيانات المستخدم في الجلسة
-        sessionStorage.setItem('loggedInUser', enteredUsername);
-        sessionStorage.setItem('userRole', 'user');
+        localStorage.setItem('currentUser', JSON.stringify(userFound));
 
-        // توجيه المستخدم العادي إلى الصفحة الرئيسية
         setTimeout(() => {
             window.location.href = './home.html';
         }, 1500);
     } else {
-        // إذا كانت البيانات غير صحيحة
         Swal.fire({
             icon: 'error',
             title: 'خطأ',
@@ -69,6 +63,12 @@ loginForm.addEventListener('submit', (e) => {
         });
     }
 
-    // إعادة تعيين الحقول
     loginForm.reset();
+});
+
+// التعامل مع الدخول كزائر
+guestLink.addEventListener('click', (e) => {
+    e.preventDefault(); // منع الانتقال المباشر
+    localStorage.setItem('currentUser', JSON.stringify({ name: "زائر", role: "guest" }));
+    window.location.href = './home.html';
 });

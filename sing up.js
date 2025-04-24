@@ -7,66 +7,52 @@ const confirmPasswordInput = document.getElementById('confirm-password');
 
 // التعامل مع الحدث عند إرسال النموذج
 form.addEventListener('submit', (e) => {
-    e.preventDefault(); // منع الإرسال الافتراضي للنموذج
+    e.preventDefault();
 
-    // التحقق من تطابق كلمة المرور مع تأكيدها
     if (passwordInput.value !== confirmPasswordInput.value) {
         Swal.fire({
-            icon: 'error', // أيقونة الخطأ
+            icon: 'error',
             title: 'خطأ',
             text: 'كلمة المرور وتأكيدها غير متطابقين. يرجى التأكد.',
             confirmButtonText: 'حسناً'
         });
-        return; // إيقاف الإجراء
+        return;
     }
 
-    // جلب البيانات المدخلة
     const userData = {
         name: nameInput.value,
         email: emailInput.value,
         password: passwordInput.value,
     };
 
-    // الحصول على البيانات الحالية المخزنة في localStorage
     let storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-
-    // إضافة البيانات الجديدة
     storedUsers.push(userData);
-
-    // تخزين البيانات في localStorage
     localStorage.setItem('users', JSON.stringify(storedUsers));
 
-    // إعادة تعيين الحقول بعد الحفظ
+    // ✅ تخزين المستخدم الحالي
+    localStorage.setItem('currentUser', JSON.stringify(userData));
+
     form.reset();
 
-    // عرض رسالة تأكيد باستخدام SweetAlert2
     Swal.fire({
-        icon: 'success', // أيقونة النجاح
+        icon: 'success',
         title: 'تم التسجيل بنجاح!',
         text: 'تم حفظ بياناتك بنجاح.',
         showConfirmButton: false,
-        timer: 1500 // إغلاق التنبيه تلقائيًا بعد 1.5 ثانية
+        timer: 1500
     });
 
-    // عرض رسالة ترحيب باستخدام Toastify
     Toastify({
-        text: `مرحبًا ${userData.name}!`, // رسالة الترحيب مع اسم المستخدم
-        duration: 3000, // مدة ظهور الرسالة (3 ثوانٍ)
-        close: true, // إظهار زر الإغلاق
-        gravity: "top", // موقع الرسالة (أعلى الصفحة)
-        position: "center", // محاذاة الرسالة (في المنتصف)
-        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)", // لون الخلفية
-        stopOnFocus: true, // إيقاف الإغلاق التلقائي عند التركيز على الرسالة
+        text: `مرحبًا ${userData.name}!`,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+        stopOnFocus: true,
     }).showToast();
 
-    // توجيه المستخدم إلى الصفحة الرئيسية بعد 2 ثانية
     setTimeout(() => {
         window.location.href = './home.html';
     }, 2000);
-});
-
-// استرجاع وعرض البيانات من localStorage (اختياري)
-document.addEventListener('DOMContentLoaded', () => {
-    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-    console.log('المستخدمون المخزنون:', storedUsers);
 });

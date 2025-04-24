@@ -143,38 +143,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const userName = document.getElementById("user-name");
   const logoutBtn = document.getElementById("logout-btn");
 
-  // جلب بيانات المستخدم من localStorage
-  let storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-  if (storedUsers.length > 0) {
-      userName.textContent = storedUsers[storedUsers.length - 1].name; // عرض آخر مستخدم مسجل
+  // جلب المستخدم الحالي من localStorage
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (currentUser && currentUser.name) {
+    userName.textContent = currentUser.name;
   } else {
-      userName.textContent = "زائر";
+    userName.textContent = "زائر";
   }
 
   // إظهار / إخفاء القائمة عند النقر على أيقونة المستخدم
   userIcon.addEventListener("click", () => {
-      dropdownMenu.parentElement.classList.toggle("active");
+    dropdownMenu.parentElement.classList.toggle("active");
   });
 
   // تسجيل الخروج
   logoutBtn.addEventListener("click", () => {
-      // عرض رسالة تأكيد باستخدام SweetAlert2
-      Swal.fire({
-          title: 'هل أنت متأكد؟',
-          text: 'هل تريد تسجيل الخروج؟',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'نعم، سجل الخروج',
-          cancelButtonText: 'إلغاء'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              // تحويل المستخدم إلى صفحة تسجيل الدخول بدون حذف البيانات
-              window.location.href = "./index.html";
-          }
-      });
+    Swal.fire({
+      title: 'هل أنت متأكد؟',
+      text: 'هل تريد تسجيل الخروج؟',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'نعم، سجل الخروج',
+      cancelButtonText: 'إلغاء'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // حذف بيانات المستخدم الحالي فقط
+        localStorage.removeItem("currentUser");
+        window.location.href = "./index.html";
+      }
+    });
   });
 });
-
 
 
 

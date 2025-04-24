@@ -14,31 +14,47 @@
     <header>
         <div class="left-section">
           <a href="https://wa.me/message/KKORYQC22BFQA1">
-            <img src=".//logo/WhatsApp Image 2024-12-09 at 9.55.46 PM.jpeg" alt="WhatsApp Logo" />
+            <img src="./logo/WhatsApp Image 2024-12-09 at 9.55.46 PM.jpeg" alt="WhatsApp Logo" />
           </a>
-          <img src=".//logo/phone.png" alt="Hotline Logo" />
+          <img src="./logo/phone.png" alt="Hotline Logo" />
+      
           <a href="./cart-count.html">
             <div class="cart-container">
-              <img src=".//logo/basket.png" alt="Cart Logo سلة التسوق" />
+              <img src="./logo/basket.png" alt="Cart Logo سلة التسوق" />
               <span id="cart-count" class="cart-count">0</span>
             </div>
           </a>
-          
+      
           <!-- أيقونة المستخدم -->
           <div class="user-menu">
-            <img src=".//logo/user.png" alt="User Icon" id="user-icon" />
+            <img src="./logo/user.png" alt="User Icon" id="user-icon" />
             <div class="dropdown-menu" id="dropdown-menu">
-                <p id="user-name">اسم المستخدم</p>
-                <button id="logout-btn">تسجيل الخروج</button>
+              <p id="user-name">اسم المستخدم</p>
+              <button id="logout-btn">تسجيل الخروج</button>
             </div>
+          </div>
         </div>
-        </div>
-      
+        
+        <!-- شريط البحث -->
         <div class="search-bar">
-          <input type="text" placeholder="Search Vision Tech..." />
+          <span id="search-icon" class="search-icon">🔍</span>
+          <input type="text" placeholder="Search Vision Tech..." id="search-input" />
         </div>
+        <!-- قائمة العروض والمنتجات -->
+        <nav class="product-menu">
+          <div class="dropdown">
+            <button class="dropbtn">🛍️ العروض والمنتجات</button>
+            <div class="dropdown-content">
+              <a href="./Camira.html">📷 الكاميرات</a>
+              <a href="./pasma.html">🧬 أجهزة البصمة</a>
+              <a href="./hard.html">💾 هارد التسجيل</a>
+              <a href="./Axss.html">🔌 الإكسسوارات</a>
+              <a href="./ofars.html">📢 العروض</a>
+            </div>
+          </div>
+        </nav>
+      
       </header>
-
 
 <br><br><br>
 
@@ -85,12 +101,13 @@
         </footer>
     </div>
 
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
 
     <script>
         // دالة لحفظ البيانات في LocalStorage
@@ -129,8 +146,124 @@
             // إعادة تعيين النموذج
             document.getElementById('supportForm').reset();
         });
+
+
+
+
+
+
+
+
+
+
+// ايكون المستخدم
+document.addEventListener("DOMContentLoaded", () => {
+  const userIcon = document.getElementById("user-icon");
+  const dropdownMenu = document.getElementById("dropdown-menu");
+  const userName = document.getElementById("user-name");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  // جلب المستخدم الحالي من localStorage
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (currentUser && currentUser.name) {
+    userName.textContent = currentUser.name;
+  } else {
+    userName.textContent = "زائر";
+  }
+
+  // إظهار / إخفاء القائمة عند النقر على أيقونة المستخدم
+  userIcon.addEventListener("click", () => {
+    dropdownMenu.parentElement.classList.toggle("active");
+  });
+
+  // تسجيل الخروج
+  logoutBtn.addEventListener("click", () => {
+    Swal.fire({
+      title: 'هل أنت متأكد؟',
+      text: 'هل تريد تسجيل الخروج؟',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'نعم، سجل الخروج',
+      cancelButtonText: 'إلغاء'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // حذف بيانات المستخدم الحالي فقط
+        localStorage.removeItem("currentUser");
+        window.location.href = "./index.html";
+      }
+    });
+  });
+});
+
+
+
+
+
+
+//  الهدار السيرش 
+const products = [
+  { name: 'كاميرا مراقبة', keywords: ['كاميرا', 'camera'], url: './Camira.html' },
+  { name: 'بصمة حضور وانصراف', keywords: ['بصمة', 'fingerprint'], url: './pasma.html' },
+  { name: 'هارد تسجيل', keywords: ['هارد', 'تسجيل', 'hard'], url: './hard.html' },
+  { name: 'اكسسوارات', keywords: ['اكسسوار', 'accessory'], url: './Axss.html' },
+  { name: 'عروض خاصة', keywords: ['عرض', 'عروض', 'offers'], url: './ofars.html' },
+  { name: 'كاميرا IP موديل HIKVISION DS-2CD1023G0-I', keywords: ['hikvision', 'ds-2cd1023g0-i', 'كاميرا ip'], url: './product1.html' },
+  { name: 'Fingerprint ZKTeco MB160', keywords: ['zkteco', 'mb160', 'fingerprint'], url: './product2.html' },
+  // أضف منتجات تانية هنا
+];
+
+const searchIcon = document.getElementById('search-icon');
+const searchInput = document.getElementById('search-input');
+
+// إظهار وإخفاء خانة البحث
+searchIcon.addEventListener('click', () => {
+  const isVisible = searchInput.style.display === 'block';
+  searchInput.style.display = isVisible ? 'none' : 'block';
+  if (!isVisible) searchInput.focus();
+});
+
+// تنفيذ البحث عند الضغط على Enter
+searchInput.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    const query = searchInput.value.trim().toLowerCase();
+
+    const result = products.find(product =>
+      product.keywords.some(keyword => query.includes(keyword.toLowerCase()))
+    );
+
+    if (result) {
+      window.location.href = result.url;
+    } else {
+      alert('لم يتم العثور على نتائج مطابقة!');
+    }
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
  
 </body>
 </html>
