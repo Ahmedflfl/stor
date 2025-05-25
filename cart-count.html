@@ -53,36 +53,42 @@
       <div class="total container " style="text-align:center;">المجموع الكلي: <span id="total-amount">0</span> جنيه</div>
       <button class="send-order-btn  " onclick="showOrderForm()" >إرسال الطلب</button>
     
-      <!-- فورم إرسال الطلب -->
-      <div class="order-form" id="order-form">
-        <h2>تفاصيل الطلب</h2>
-        <form id="order-details-form">
-          <input type="text" id="customer-name" placeholder="اسم العميل" required>
-          <input type="text" id="customer-address" placeholder="العنوان" required>
-          <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required>
-          <select id="payment-method" required onchange="showWalletNumber(this.value)">
-            <option value="">اختر طريقة الدفع</option>
-            <option value="عند الاستلام">عند الاستلام</option>
-            <option value="فودافون كاش">فودافون كاش</option>
-            <option value="أورنج كاش">أورنج كاش</option>
-            <option value="اتصالات كاش">اتصالات كاش</option>
-          </select>
-          <div id="wallet-number-container" style="display: none;">
-            <input type="text" id="wallet-number" placeholder="رقم المحفظة أو التليفون الخاص بك" required>
-          </div>
-          <div id="company-wallet-numbers" class="wallet-numbers" style="display: none;">
-            <p>أرقام محافظ الشركة:</p>
-            <p>1: 01208395908</p>
-            <p>2: 01101381786</p>
-            <p>3: 01026306624</p>
-          </div>
-          <div id="upload-image-container" style="display: none;">
-            <input type="file" id="upload-image" accept="image/*">
-          </div>
-          <button type="submit">إرسال الطلب</button>
-        </form>
-      </div>
+     <!-- فورم إرسال الطلب مع زر الإغلاق -->
+<div id="order-form" class="order-form">
+  <button id="close-order-form" class="close-btn">&times;</button>
 
+  <h2>تفاصيل الطلب</h2>
+  <form id="order-details-form">
+    <input type="text" id="customer-name" placeholder="اسم العميل" required>
+    <input type="text" id="customer-address" placeholder="العنوان" required>
+    <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required>
+
+    <select id="payment-method" required onchange="showWalletNumber(this.value)">
+      <option value="">اختر طريقة الدفع</option>
+      <option value="عند الاستلام">عند الاستلام</option>
+      <option value="فودافون كاش">فودافون كاش</option>
+      <option value="أورنج كاش">أورنج كاش</option>
+      <option value="اتصالات كاش">اتصالات كاش</option>
+    </select>
+
+    <div id="wallet-number-container" style="display: none;">
+      <input type="text" id="wallet-number" placeholder="رقم المحفظة أو التليفون الخاص بك" required>
+    </div>
+
+    <div id="company-wallet-numbers" class="wallet-numbers" style="display: none;">
+      <p>أرقام محافظ الشركة:</p>
+      <p>1: 01208395908</p>
+      <p>2: 01101381786</p>
+      <p>3: 01026306624</p>
+    </div>
+
+    <div id="upload-image-container" style="display: none;">
+      <input type="file" id="upload-image" accept="image/*">
+    </div>
+
+    <button type="submit">إرسال الطلب</button>
+  </form>
+</div>
 
       
 
